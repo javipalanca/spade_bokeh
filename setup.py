@@ -5,13 +5,20 @@
 
 from setuptools import setup, find_packages
 
+
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
+
+
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ["spade>=3.0.3", "tornado==5.1", "bokeh==0.13.0"]
+requirements = parse_requirements("requirements.txt")
 
 setup_requirements = ['pytest-runner', ]
 

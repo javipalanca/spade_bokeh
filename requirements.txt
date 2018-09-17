@@ -1,0 +1,4 @@
+spade>=3.0.3
+tornado==5.1
+bokeh==0.13.0
+
