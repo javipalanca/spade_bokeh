@@ -4,12 +4,17 @@
 """Tests for `spade_bokeh` package."""
 from collections import namedtuple
 
+import pytest
+
 from spade_bokeh import spade_bokeh
 
-agent = namedtuple("agent", "port")(port=1024)
+
+@pytest.fixture
+def agent():
+    return namedtuple("agent", "port")(port=1024)
 
 
-def test_server():
+def test_server(agent):
     server = spade_bokeh.BokekServer(agent)
 
     assert server.agent.port == 1024
@@ -19,7 +24,7 @@ def test_server():
     assert not server.is_running
 
 
-def test_add_plot():
+def test_add_plot(agent):
     server = spade_bokeh.BokekServer(agent)
 
     server.add_plot("/my_plot", lambda x: x)

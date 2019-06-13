@@ -26,7 +26,7 @@ To use SPADE Bokeh Server in a project::
     class MyBokehAgent(spade_bokeh.BokehServerMixin, agent.Agent):
 
         # agent setup
-        def setup(self):
+        async def setup(self):
 
             self.web.add_get("/plot", self.controller, "plot.html")
 
