@@ -32,7 +32,9 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
     ],
     description="Bokeh server for SPADE agents that integrates with agents web service.",
     install_requires=requirements,
@@ -46,6 +48,6 @@ setup(
     test_suite='tests',
     tests_require=test_requirements,
     url='https://github.com/javipalanca/spade_bokeh',
-    version='0.1.2',
+    version='0.2.0',
     zip_safe=False,
 )

@@ -2,6 +2,12 @@
 History
 =======
 
+0.2.0 (2023-06-14)
+------------------
+
+* Upgraded to SPADE>=3.3 (older versions are deprecated).
+* Upgraded to Python>=3.8 (older versions are deprecated).
+
 0.1.2 (2018-09-17)
 ------------------
 

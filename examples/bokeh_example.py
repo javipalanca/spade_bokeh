@@ -1,17 +1,15 @@
 import getpass
 
-from spade import agent
-
-import spade_bokeh
-
+import spade
 from bokeh.layouts import column
 from bokeh.models import ColumnDataSource, Slider
 from bokeh.plotting import figure
-
 from bokeh.sampledata.sea_surface_temperature import sea_surface_temperature
 
+import spade_bokeh
 
-class MyBokehAgent(spade_bokeh.BokehServerMixin, agent.Agent):
+
+class MyBokehAgent(spade_bokeh.BokehServerMixin, spade.agent.Agent):
 
     async def controller(self, request):
         script = self.bokeh_server.get_plot_script("/my_plot")
@@ -40,7 +38,7 @@ class MyBokehAgent(spade_bokeh.BokehServerMixin, agent.Agent):
                 data = df
             else:
                 data = df.rolling('{0}D'.format(new)).mean()
-            source.data = ColumnDataSource(data=data).data
+            source.data = data
 
         slider = Slider(start=0, end=30, value=0, step=1, title="Smoothing by N Days")
         slider.on_change('value', callback)
@@ -48,9 +46,14 @@ class MyBokehAgent(spade_bokeh.BokehServerMixin, agent.Agent):
         doc.add_root(column(slider, plot))
 
 
+async def main(jid, passwd):
+    a = MyBokehAgent(jid, passwd)
+    await a.start()
+
+    await spade.wait_until_finished(a)
+
 if __name__ == "__main__":
 
     jid = input("Agent JID> ")
     passwd = getpass.getpass()
-    a = MyBokehAgent(jid, passwd)
-    a.start()
+    spade.run(main(jid, passwd))

@@ -42,6 +42,6 @@ def test_get_plot_script():
     script = server.get_plot_script("/my_plot")
 
     assert type(script) == str
-    assert script.startswith("\n<script ")
+    assert script.startswith("<script ")
     assert "bokeh-absolute-url=http://hostname:1024/my_plot" in script
     assert script.endswith("</script>")
